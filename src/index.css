@@ -1,0 +1,10 @@
+:root {
+  --main-color: #5172e7;
+  --border-color: #ccc;
+}
+
+body {
+  background-color: var(--main-color);
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}

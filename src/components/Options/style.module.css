@@ -1,0 +1,10 @@
+.options {
+  padding: 15px 20px;
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
