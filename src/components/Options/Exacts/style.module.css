@@ -16,6 +16,15 @@
   &:active svg {
     opacity: 0.5;
   }
+
+  &:disabled {
+    user-select: none;
+    pointer-events: none;
+
+    svg {
+      opacity: 0.1;
+    }
+  }
 }
 
 .row {

@@ -6,6 +6,11 @@
   border: none;
   resize: none;
   min-height: 175px;
+
+  &:disabled {
+    background-color: transparent;
+    color: currentColor;
+  }
 }
 
 .withLine {

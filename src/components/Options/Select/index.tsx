@@ -2,11 +2,24 @@ import React from 'react';
 
 import css from './style.module.css';
 
-const Select: React.FC = () => {
+import { SetValueType } from '@/models/inputs';
+
+import countries from '@/utils/countries';
+
+interface SelectProps {
+  value: string;
+  setValue: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+const Select: React.FC<SelectProps> = ({ value, setValue }) => {
   return (
     <div className={css.selectWrapper}>
-      <select className={css.select}>
-        <option value={'Russian'}>Russian</option>
+      <select value={value} onChange={setValue} className={css.select}>
+        {Object.entries(countries).map(([code, country]) => (
+          <option value={code} key={code}>
+            {country}
+          </option>
+        ))}
       </select>
 
       <svg className={css.selectIcon} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">

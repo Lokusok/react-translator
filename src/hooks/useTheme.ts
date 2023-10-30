@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ITheme } from '@/models';
+import { ITheme } from '@/models/theme';
 
 import ThemeContext from '@/contexts/theme';
 

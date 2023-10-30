@@ -1,19 +1,16 @@
-import ThemeContext from './contexts/theme';
-
 import Translator from './components/Translator';
 import Center from './layout/Center';
 
-const theme = {
-  iconsColor: '#a09ea0',
-};
+import { Provider } from 'react-redux';
+import store from './store';
 
 const App: React.FC = () => {
   return (
-    <ThemeContext.Provider value={theme}>
+    <Provider store={store}>
       <Center>
         <Translator />
       </Center>
-    </ThemeContext.Provider>
+    </Provider>
   );
 };
 

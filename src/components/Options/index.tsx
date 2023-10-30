@@ -5,12 +5,21 @@ import css from './style.module.css';
 import Exacts from './Exacts';
 import Languages from './Languages';
 
-const Options: React.FC = () => {
+import { IInput, SetValueType } from '@/models/inputs';
+
+interface OptionsProps {
+  from: IInput;
+  setFrom: SetValueType;
+  to: IInput;
+  setTo: SetValueType;
+}
+
+const Options: React.FC<OptionsProps> = ({ from, setFrom, to, setTo }) => {
   return (
     <div className={css.options}>
-      <Exacts />
-      <Languages />
-      <Exacts />
+      <Exacts from={from} to={to} isItFrom={true} />
+      <Languages from={from} setFrom={setFrom} to={to} setTo={setTo} />
+      <Exacts from={from} to={to} isItFrom={false} />
     </div>
   );
 };

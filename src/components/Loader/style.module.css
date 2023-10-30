@@ -1,0 +1,31 @@
+.loaderWrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid var(--main-color);
+  border-bottom: none;
+  border-left: none;
+
+  animation: rotate linear infinite forwards 2s;
+}
+
+@keyframes rotate {
+  0% {
+    rotate: 0deg;
+  }
+
+  50% {
+    rotate: 180deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}

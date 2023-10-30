@@ -2,20 +2,48 @@ import React from 'react';
 
 import css from './style.module.css';
 
-import TextArea from '../TextArea';
+import FromText from './FromText';
+import ToText from './ToText';
 import Options from '../Options';
 
+import useDebounceSearch from '@/hooks/useDebounceSearch';
+import { useLazyTranslateTextQuery } from '@/store/slices/languages';
+
+import { IInput } from '@/models/inputs';
+
 const Interactions: React.FC = () => {
+  const [from, setFrom] = React.useState<IInput>({ text: '', source: 'en-GB' });
+  const [to, setTo] = React.useState<IInput>({ text: '', source: 'ru-RU' });
+
+  const [translateText, { data, isFetching }] = useLazyTranslateTextQuery();
+  useDebounceSearch(translateText, from, to);
+
+  React.useEffect(() => {
+    if (!data || data.responseStatus !== 200) {
+      return;
+    }
+
+    if (!from.text.length) {
+      setTo((prev) => ({ ...prev, text: '' }));
+      return;
+    }
+
+    const { translatedText } = data.responseData;
+    setTo((prev) => ({ ...prev, text: translatedText }));
+  }, [data, from]);
+
   return (
-    <div>
-      <div className={css.inputs}>
-        <TextArea placeholder={'Enter text'} addLine />
-        <TextArea placeholder={'Translation'} />
+    <>
+      <div>
+        <div className={css.inputs}>
+          <FromText placeholder={'Enter text'} addLine value={from} setValue={setFrom} />
+          <ToText placeholder={'Translation'} disabled value={to} setValue={setTo} isFetching={isFetching} />
+        </div>
+        <div className="line">
+          <Options from={from} setFrom={setFrom} to={to} setTo={setTo} />
+        </div>
       </div>
-      <div className="line">
-        <Options />
-      </div>
-    </div>
+    </>
   );
 };
 
