@@ -20,8 +20,9 @@ interface ResponseOnError {
 const languagesApi = createApi({
   reducerPath: 'languagesApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.mymemory.translated.net' }),
+  tagTypes: ['Languages'],
   endpoints: (builder) => ({
-    translateText: builder.query<ServerResponse | ResponseOnError, ILanguagesProps>({
+    translateText: builder.mutation<ServerResponse | ResponseOnError, ILanguagesProps>({
       query: ({ from, to }) => ({
         url: '/get',
         params: {
@@ -37,10 +38,12 @@ const languagesApi = createApi({
 
         return response;
       },
+
+      invalidatesTags: ['Languages'],
     }),
   }),
 });
 
-export const { useLazyTranslateTextQuery } = languagesApi;
+export const { useTranslateTextMutation } = languagesApi;
 
 export default languagesApi;

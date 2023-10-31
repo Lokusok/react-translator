@@ -7,7 +7,7 @@ import ToText from './ToText';
 import Options from '../Options';
 
 import useDebounceSearch from '@/hooks/useDebounceSearch';
-import { useLazyTranslateTextQuery } from '@/store/slices/languages';
+import { useTranslateTextMutation } from '@/store/slices/languages';
 
 import { IInput } from '@/models/inputs';
 
@@ -15,7 +15,7 @@ const Interactions: React.FC = () => {
   const [from, setFrom] = React.useState<IInput>({ text: '', source: 'en-GB' });
   const [to, setTo] = React.useState<IInput>({ text: '', source: 'ru-RU' });
 
-  const [translateText, { data, isFetching }] = useLazyTranslateTextQuery();
+  const [translateText, { data, isLoading }] = useTranslateTextMutation();
   useDebounceSearch(translateText, from, to);
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ const Interactions: React.FC = () => {
       <div>
         <div className={css.inputs}>
           <FromText placeholder={'Enter text'} addLine value={from} setValue={setFrom} />
-          <ToText placeholder={'Translation'} disabled value={to} setValue={setTo} isFetching={isFetching} />
+          <ToText placeholder={'Translation'} disabled value={to} setValue={setTo} isFetching={isLoading} />
         </div>
         <div className="line">
           <Options from={from} setFrom={setFrom} to={to} setTo={setTo} />
