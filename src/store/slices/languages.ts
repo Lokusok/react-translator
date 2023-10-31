@@ -11,11 +11,17 @@ interface ILanguagesProps {
   };
 }
 
+interface ResponseOnError {
+  responseData: {
+    translatedText: string;
+  };
+}
+
 const languagesApi = createApi({
   reducerPath: 'languagesApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.mymemory.translated.net' }),
   endpoints: (builder) => ({
-    translateText: builder.query<ServerResponse, ILanguagesProps>({
+    translateText: builder.query<ServerResponse | ResponseOnError, ILanguagesProps>({
       query: ({ from, to }) => ({
         url: '/get',
         params: {
@@ -23,6 +29,14 @@ const languagesApi = createApi({
           langpair: `${from.source}|${to.source}`,
         },
       }),
+
+      transformResponse: (response: ServerResponse) => {
+        if (response.responseStatus !== 200) {
+          return { responseData: { translatedText: '' } };
+        }
+
+        return response;
+      },
     }),
   }),
 });

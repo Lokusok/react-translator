@@ -19,7 +19,7 @@ const Interactions: React.FC = () => {
   useDebounceSearch(translateText, from, to);
 
   React.useEffect(() => {
-    if (!data || data.responseStatus !== 200) {
+    if (!data) {
       return;
     }
 
@@ -31,6 +31,10 @@ const Interactions: React.FC = () => {
     const { translatedText } = data.responseData;
     setTo((prev) => ({ ...prev, text: translatedText }));
   }, [data, from]);
+
+  React.useEffect(() => {
+    setTo((prev) => ({ ...prev, text: '' }));
+  }, [from]);
 
   return (
     <>
