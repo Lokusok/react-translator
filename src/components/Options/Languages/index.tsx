@@ -8,6 +8,7 @@ import iconCss from '../Exacts/style.module.css';
 import Select from '../Select';
 
 import { IInput, SetValueType } from '@/models/inputs';
+import countries from '@/utils/countries';
 
 interface LanguagesProps {
   from: IInput;
@@ -35,13 +36,13 @@ const Languages: React.FC<LanguagesProps> = ({ from, setFrom, to, setTo }) => {
 
   return (
     <div className={css.languages}>
-      <Select value={from.source} setValue={setFromValue} />
+      <Select value={from.source} setValue={setFromValue} options={countries} />
 
       <button className={iconCss.action} onClick={swapValues}>
         <AiOutlineSwap color={'#A09EA0'} size={18} />
       </button>
 
-      <Select value={to.source} setValue={setToValue} />
+      <Select value={to.source} setValue={setToValue} options={countries} />
     </div>
   );
 };

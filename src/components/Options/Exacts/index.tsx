@@ -6,6 +6,7 @@ import css from './style.module.css';
 import useTheme from '@/hooks/useTheme';
 
 import { IInput } from '@/models/inputs';
+import PopupContext from '@/contexts/popup';
 
 interface ExactsProps {
   from: IInput;
@@ -14,12 +15,13 @@ interface ExactsProps {
 }
 
 const Exacts: React.FC<ExactsProps> = ({ from, to, isItFrom }) => {
+  const { setIsActive } = React.useContext(PopupContext);
   const theme = useTheme();
   const disabled = isItFrom ? !from.text.length : !to.text.length;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(isItFrom ? from.text : to.text);
-    alert('Successfull copy');
+    setIsActive(true);
   };
   const handleSpeech = () => {
     const utterance = new SpeechSynthesisUtterance(isItFrom ? from.text : to.text);

@@ -1,0 +1,73 @@
+.popup {
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transform: translate(-50%, -1000px);
+  transition: transform ease 0.5s;
+
+  &Row {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.active {
+    transform: translateX(-50%);
+  }
+}
+
+.title {
+  font-size: 25px;
+  margin-bottom: 9px;
+}
+
+.descr {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.close {
+  position: absolute;
+  background: none;
+  border: none;
+  appearance: none;
+  font-size: 15px;
+  right: 10px;
+  top: 15px;
+  cursor: pointer;
+  transition: opacity ease 0.1s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.ok {
+  align-self: flex-end;
+  background: #185df1;
+  color: #fff;
+  font: inherit;
+  font-size: 18px;
+  border: none;
+  appearance: none;
+  cursor: pointer;
+  padding: 8px 25px;
+  border-radius: 2px;
+  transition: opacity ease 0.1s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
+}

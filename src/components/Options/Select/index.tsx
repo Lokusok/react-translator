@@ -2,22 +2,19 @@ import React from 'react';
 
 import css from './style.module.css';
 
-import { SetValueType } from '@/models/inputs';
-
-import countries from '@/utils/countries';
-
 interface SelectProps {
+  options: Record<string, string>;
   value: string;
   setValue: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ value, setValue }) => {
+const Select: React.FC<SelectProps> = ({ value, setValue, options }) => {
   return (
     <div className={css.selectWrapper}>
       <select value={value} onChange={setValue} className={css.select}>
-        {Object.entries(countries).map(([code, country]) => (
-          <option value={code} key={code}>
-            {country}
+        {Object.entries(options).map(([val, text]) => (
+          <option value={val} key={val}>
+            {text}
           </option>
         ))}
       </select>
